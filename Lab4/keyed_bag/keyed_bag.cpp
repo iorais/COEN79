@@ -1,5 +1,17 @@
 #include "keyed_bag.h"
 
+/*
+Invariant:
+[1] The number of elements in the bag is stored in the variable used. The arrays keys and data will
+    always have the same number of elements. The ith element of keys and the ith element of data are
+    key-value pairs. All elements in keys must be unique but elements in data do nothave to be unique.
+    
+[2] For an empty bag, we don't care what is stored in keys nor data. For a non-empty bag, the key-value
+    pairs are stored in keys[0] to keys[used - 1] and data[0] to data[used - 1] respectively, and we
+    don't care what is stored inthe rest of the arrays. The order does not matter as long as the ith
+    element of key is paired with the ith element of data.
+*/
+
 namespace coen79_lab4 {
 
     bool keyed_bag::erase(const key_type& key) {
@@ -30,6 +42,15 @@ namespace coen79_lab4 {
 
         // update size of bag
         used++;
+    }
+
+    void keyed_bag::operator +=(const keyed_bag& addend) {
+        assert(size() + addend.size() < CAPACITY);    // ensure addend is of legal size
+        assert(!hasDuplicateKey(addend));            // ensure addend has no duplicate keys
+
+        // insert all keys and values from addend
+        for(int i = 0; i < addend.size(); i++)
+            insert(addend.data[i], addend.keys[i]);
     }
 
     bool keyed_bag::has_key(const key_type& key) const {

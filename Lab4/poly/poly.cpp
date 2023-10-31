@@ -1,5 +1,14 @@
 #include "poly.h"
 
+/*
+Invariant:
+[1] An element from the array coefficients, coefficients[i] represents the coefficient of the ith term.
+    The array coefficients will be zero by default and contain MAXIMUM_DEGREE + 1 elements.
+    
+[2] The variable deg is the highest index containing a nonzero element. Anytime the coefficients array
+    is modified, the variable deg must be updated.
+*/
+
 namespace coen79_lab4 {
     polynomial::polynomial(double c, unsigned int exponent) {
         assert(exponent <= MAXIMUM_DEGREE); // ensures degree does not exceed max
