@@ -21,6 +21,8 @@ void match(const string& variety, const string& mine, const string& yours);
 // message is printed saying they are the same; otherwise mine is printed
 // in a message. In either case, the string variety is part of the message.
 
+void IsaacTest();
+
 int main( )
 {
     const string BLANK(" ");
@@ -45,4 +47,17 @@ void match(const string& variety, const string& mine, const string& yours)
         cout << "That is the same as my " << variety << "!" << endl;
     else
         cout << "My " << variety << " is " << mine << "." << endl;
+}
+
+void IsaacTest() {
+    string mystring = string("Hello");
+    string yourstring;
+
+    cin >> yourstring;
+
+    yourstring += mystring;
+
+    cout << "mystring: " << mystring << endl;
+    cout << "yourstring: " << yourstring << endl << "yourstring.length(): " << yourstring.length() << endl;
+
 }

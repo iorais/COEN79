@@ -119,6 +119,7 @@
 
 #include <cstdlib>  // Provides size_t
 #include <iostream>
+#include <assert.h>
 
 namespace coen79_lab5 {
 
@@ -208,16 +209,40 @@ namespace coen79_lab5 {
 
         // Postcondition: The count of the occurence of the character c within this
         // string is returned.
-        unsigned int cout(char c) const;
+        unsigned int count(char c) const;
         
         // FRIEND FUNCTIONS
+
+        // Postcondition: puts the string in the ostream
         friend std::ostream& operator <<(std::ostream& outs, const string& source);
+
+        // Precondition: the instream is of size at most 100
+        // Postcondition: puts the instream into the string target
+        friend std::istream& operator >> (std::istream& ins, string& target);
+
+        // Postcondition: returns true if the strings are the same otherwise false
         friend bool operator ==(const string& s1, const string& s2);
+
+        // Postcondition: returns true if the strings are not the same otherwise false
         friend bool operator !=(const string& s1, const string& s2);
+
+        // Postcondition: returns true if s1 preceeds s2 alphabetically otherwise false
         friend bool operator > (const string& s1, const string& s2);
+
+        // Postcondition: returns true if s1 follows s2 alphabetically otherwise false
         friend bool operator < (const string& s1, const string& s2);
+
+        // Postcondition: returns true if s1 preceeds or is equal to s2 alphabetically otherwise false
         friend bool operator >=(const string& s1, const string& s2);
+
+        // Postcondition: returns true if s1 follows or is equal to s2 alphabetically otherwise false
         friend bool operator <=(const string& s1, const string& s2);
+
+        // Postcondition: returns a string with characters from s1 in front and s2 at the end
+        friend string operator +(const string& s1, const string& s2);
+
+        // Postcondition: returns a string with characters from s1 in front and addend at the end
+        friend string operator +(const string& s1, const char addend[ ]);
         
     private:
         char *characters;
@@ -225,10 +250,6 @@ namespace coen79_lab5 {
         size_t current_length;
     };
 
-    // NON-MEMBER FUNCTIONS for the string class
-    string operator +(const string& s1, const string& s2);
-    string operator +(const string& s1, const char addend[ ]);
-    std::istream& operator >> (std::istream& ins, string& target);
 }
 
 #endif
