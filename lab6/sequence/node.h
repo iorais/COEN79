@@ -189,6 +189,7 @@
 
 #ifndef COEN_79_NODE_H
 #define COEN_79_NODE_H
+#include <iostream>
 #include <cstdlib> // Provides size_t and NULL
 
 namespace coen79_lab6
@@ -238,13 +239,63 @@ namespace coen79_lab6
     void list_copy(const node* source_ptr, node*& head_ptr, node*& tail_ptr);
     
     // IMPLEMENT THE FOLLOWING FUNCTIONS
+
+    // Precondition: start_ptr and end_ptr are pointers to nodes on the same
+    // linked list, with the start_ptr node at or before the end_ptr node
+    // Postcondition: head_ptr and tail_ptr are the head and tail pointers for a
+    // new list that contains the items from start_ptr up to but not including
+    // end_ptr.  The end_ptr may also be NULL, in which case the new list
+    // contains elements from start_ptr to the end of the list.
     void list_piece(node* start_ptr, node* end_ptr, node*& head_ptr, node*& tail_ptr);
+
+    // Precondition: head_ptr is the head pointer of a linked list.
+    // Postcondition: The return value is the count of the number of times
+    // target appears as the data portion of a node on the linked list.
+    // The linked list itself is unchanged.
     size_t list_occurrences(node* head_ptr, const node::value_type& target);
+
+    // Precondition: head_ptr is the head pointer of a linked list, and
+    // position > 0 and position <= list_length(head_ptr)+1.
+    // Postcondition: A new node has been added to the linked list with entry
+    // as the data. The new node occurs at the specified position in the list.
+    // (The head node is position 1, the next node is position 2, and so on.)
+    // Any nodes that used to be after this specified position have been
+    // shifted to make room for the one new node.
     void list_insert_at(node*& head_ptr, const node::value_type& entry, size_t position);
+    
+
+    // Precondition: head_ptr is the head pointer of a linked list, and
+    // position > 0 and position <= list_length(head_ptr).
+    // Postcondition: The node at the specified position has been removed from
+    // the linked list and the function has returned a copy of the data from
+    // the removed node.
+    // (The head node is position 1, the next node is position 2, and so on.)
     node::value_type list_remove_at(node*& head_ptr, size_t position);
+
+    // Precondition: head_ptr is the head pointer of a linked list, and
+    // (1 <= start) and (start <= finish) and (finish <= list_length(head_ptr)).
+    // Postcondition: The value returned is the head pointer for
+    // a new list that contains copies of the items from the start position to
+    // the finish position in the list that head_ptr points to.
+    // (The head node is position 1, the next node is position 2, and so on.)
+    // The list pointed to by head_ptr is unchanged.
     node* list_copy_segment(node* head_ptr, size_t start, size_t finish);
+
+    // Precondition: head_ptr is the head pointer of a linked list, and
+    // the operator << has been defined for the value_type
+    // Postcondition: The value_type of all the nodes in the linked list are printed
     void list_print (const node* head_ptr);
+
+    // Precondition: head_ptr is the head pointer of a linked list
+    // Postcondition: All the duplicates are removed from the linked list
+    // Example: If the list contains 1,1,1,2, after running this function the list
+    // contains 1,2
     void list_remove_dups(node* head_ptr);
+
+    // Precondition: head_ptr is the head pointer of a linked list
+    // Postcondition: If there is a loop in the linked list, the returned value
+    // is a pointer to the start of the loop. The returned value is NULL if
+    // there is no loop in the list
     node* list_detect_loop (node* head_ptr);
 
 }

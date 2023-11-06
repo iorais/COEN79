@@ -98,17 +98,48 @@ namespace coen79_lab6
         ~sequence( );
         
         // MODIFICATION MEMBER FUNCTIONS
+
+        // Postcondition: The precursor and cursor are adjusted such that the first
+        // item in the sequence becomes the current item (but if the sequence is
+        // empty, then there is no current item).
         void start( );
+
+        // Postcondition: The precursor and cursor are adjusted such that the last
+        // item in the sequence becomes the current item (but if the sequence is
+        // empty, then there is no current item).
         void end();
+
+        // Precondition: is_item returns true.
+        // Postcondition: If the current item was already the last item in the
+        // sequence, then there is no longer any current item. Otherwise, the new
+        // current item is the item immediately after the original current item.
         void advance( );
+
+
+        // Postcondition: A new copy of entry has been inserted in the sequence
+        // before the current item. If there was no current item, then the new entry
+        // has been inserted at the front of the sequence. In either case, the newly
+        // inserted item is now the current item of the sequence.
         void insert(const value_type& entry);
+
+        // Postcondition: A new copy of entry has been inserted in the sequence after
+        // the current item. If there was no current item, then the new entry has
+        // been attached to the end of the sequence. In either case, the newly
+        // inserted item is now the current item of the sequence.
         void attach(const value_type& entry);
+
+
         void operator =(const sequence& source);
+
+
+        // Precondition: is_item returns true.
+        // Postcondition: The current item has been removed from the sequence, and
+        // the item after this (if there is one) is now the new current item.
 	    void remove_current( );
         
         // CONSTANT MEMBER FUNCTIONS
-        size_type size( ) const;
-        bool is_item( ) const;
+        size_type size( ) const {return many_nodes; }
+        bool is_item( ) const { return cursor != NULL; }
         value_type current( ) const;
     
     private:
